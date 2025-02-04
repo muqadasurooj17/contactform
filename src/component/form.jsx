@@ -24,7 +24,7 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let formIsValid = true;
     let newErrors = { name: "", city: "", age: "", email: "", password: "" };
@@ -48,14 +48,31 @@ const ContactForm = () => {
       formIsValid = false;
       newErrors.password = "Password must be at least 6 characters";
     }
-
     setErrors(newErrors);
     if (!formIsValid) {
       alert("Please fill out all required fields correctly");
       return;
     }
-    alert("Form submitted successfully!");
+  
+    try {
+      const response = await fetch("https://your-api.com/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert("Form submitted successfully!");
+      } else {
+        alert(`Error: ${data.message || "Something went wrong"}`);
+      }
+    } catch (error) {
+      alert("Network error: " + error.message);
+    }
   };
+  
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">

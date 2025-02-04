@@ -17,8 +17,7 @@ const TodoList = () => {
   };
 
   return (
-    
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-lg mt-10">
       <h2 className="text-2xl font-semibold text-center mb-6">Todo List</h2>
       <div className="mb-4">
         <input
@@ -36,7 +35,7 @@ const TodoList = () => {
         Add Task
       </button>
       <ul className="mt-6">
-        {tasks.map((task, index) => (
+        {tasks?.map((task, index) => (
           <li
             key={index}
             className="flex justify-between items-center bg-gray-100 p-3 mb-2 rounded-md"
